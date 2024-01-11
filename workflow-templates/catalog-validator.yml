@@ -7,7 +7,7 @@ env:
 on:
   pull_request:
     branches:
-      - [ $default-branch ]
+      - $default-branch
     paths:
       - ${{ env.PATH_TO_CATALOG_FILE }}
 
