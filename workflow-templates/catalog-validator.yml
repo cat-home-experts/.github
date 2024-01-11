@@ -1,0 +1,37 @@
+---
+name: Catalog file linter and validator
+
+env:
+  PATH_TO_CATALOG_FILE: 'catalog-info.yaml'
+
+on:
+  pull_request:
+    branches:
+      - [ $default-branch ]
+    paths:
+      - ${{ env.PATH_TO_CATALOG_FILE }}
+
+jobs:
+  lint_and_validate:
+    name: Lint and validate catalog file
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Lint catalog-info
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: ${{ env.PATH_TO_CATALOG_FILE }}
+          config_data: |
+            extends: default
+            rules:
+              line-length:
+                max: 500
+              document-start:
+                level: error
+
+      - name: Validate catalog-info
+        uses: cat-home-experts/backstage-catalog-file-validator@main
+        with:
+          path: ${{ env.PATH_TO_CATALOG_FILE }}

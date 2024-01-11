@@ -1,0 +1,7 @@
+{
+  "name": "Backstage Catalog File Validator",
+  "description": "Backstage Catalog File Validator starter workflow.",
+  "iconName": "octicon checklist-24",
+  "categories": ["YAML"],
+  "filePatterns": ["^catalog-info.yaml$"]
+}
